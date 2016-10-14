@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Rate</title>
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <script src="js/semantic.min.js"></script>
+    <script src="js/webglearth.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/highcharts.js"></script>
+    <script src="js/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+<div class="ui stackable menu">
+    <div class="ui container menu_item">
+        <a class="item logo" href="/">
+            <b>MuRate</b>
+        </a>
+        <div class="right menu">
+            <a class="ui item">Sign In</a>
+            <a class="ui item">Sign Up</a>
+        </div>
+    </div>
+</div>
+
+<div class="ui container grid">
+    <div class="row">
+        <div class="four wide column">
+            <div class="ui two column grid celled" id="base_currency">
+                <div class="column">
+                    <div class="ui image small">
+                        <img :src="'image/'+base_currency.icon+'.svg'">
+                    </div>
+                </div>
+                <div class="column">
+                    <div>
+                        <span class="ui header">{{base_currency.code}}</span>
+                    </div>
+                    <div>
+                        <span class="ui center">{{base_currency.name}}</span>
+                    </div>
+                    <div>
+                        <button class="tiny ui icon button right floated" v-on:click="switch_currency"><i class="icon setting"></i> </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+    <div id="earth_div" style="width:100%;height:800px"></div>
+    </div>
+
+
+    <div class="ui modal" id="currencies">
+        <div class="header">
+            Chose The Base Currency
+        </div>
+        <div class="content">
+            <div class="ui eight cards doubling" id="test">
+                <template v-for="currency in currencies">
+                    <a class="card" data-cid={{currency.cid}} v-on:click="select_currency">
+                        <div class="image">
+                            <img :src="'image/'+currency.icon+'.svg'">
+                        </div>
+                        <div class="content">
+                            <div class="header">{{currency.code}}</div>
+                            <div class="meta"><span>{{currency.name}}</span></div>
+                        </div>
+                    </a>
+                </template>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui modal" id="charts">
+        <div class="header">
+            History
+        </div>
+        <div class="ui blue three item inverted menu" id="interval_select">
+            <a class="item active" data-interval = "one month">
+                One Month
+            </a>
+            <a class="item" data-interval = "three month">
+                Three Month
+            </a>
+            <a class="item" data-interval = "one year">
+                One Year
+            </a>
+        </div>
+        <div class="content">
+            <div id="highcharts">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
